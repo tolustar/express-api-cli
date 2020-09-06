@@ -35,7 +35,9 @@ const npmInstall = (projectName) => {
     Create something Awesome
        🚀🚀🚀🚀🚀
 
-    Visit https://google.com for Express
+    For How to use and more info on express-api-cli
+    Visit https://github.com/tolustar/express-api-cli/ 
+    Cheers!!!
 
     `)
     );

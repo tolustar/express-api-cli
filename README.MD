@@ -1,3 +1,5 @@
+**npm install -g express-api-cli**
+
 > speed up your application development with express-api-cli
 
 ## About
