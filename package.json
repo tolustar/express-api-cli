@@ -1,6 +1,6 @@
 {
   "name": "express-api-cli",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Cli tool for generating an express project. Instead of wasting extra time creating your project structure, start building right away",
   "preferGlobal": true,
   "bin": {
@@ -24,5 +24,15 @@
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-prettier": "^3.1.4",
     "prettier": "^2.1.1"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tolustar/express-api-cli"
+  },
+  "keywords": [
+    "express",
+    "api",
+    "cli",
+    "express-api"
+  ]
 }

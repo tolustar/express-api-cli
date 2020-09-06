@@ -9,27 +9,28 @@ concentrate on building that awesome application
 
 ## Features
 
-- [ ] Preconfigured database driver (Mongoose and Sequelize)
-- [ ] Typescript support
-- [ ] Generate Models, Controllers, Routes, Services and Test files directly from the command
-- [ ] Easy exception handling
-- [ ] Beautiful clear code structure
-- [ ] Integrated Testing tool
-- [ ] Eslint and Prettier Formatting
-- [ ] Integrated Basic Security e.t.c
+- [x] Preconfigured database driver (Mongoose and Sequelize)
+- [x] Typescript support
+- [x] Generate Models, Controllers, Routes, Services and Test files directly from the command
+- [x] Easy exception handling
+- [x] Beautiful clear code structure
+- [x] Integrated Testing tool
+- [x] Eslint and Prettier Formatting
+- [x] Integrated Basic Security e.t.c
 
 ## Getting Started
 
 1.  Ensure [Node.js and NPM](https://nodejs.org/en/download/) is installed on your computer
-2.  Open your command line tool and type the following command to create a new project
+2.  Install the package **npm install -g express-api-cli**
+3.  Open your command line tool and type the following command to create a new project
 
     exp-api create awesome-project
 
     Subsitute 'awesome-project' with the name of your project.
 
-3.  Select your preferred language (Javascript or Typescript) and Database Driver (Mongoose or
+4.  Select your preferred language (Javascript or Typescript) and Database Driver (Mongoose or
     Sequelize)
-4.  Once project is installed, configure your environment variables
+5.  Once project is installed, configure your environment variables
 
 Voila!!! you are set to start creating an awesome application 🚀🚀🚀
 
