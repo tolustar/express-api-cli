@@ -1,7 +1,7 @@
 {
   "name": "express-starter",
-  "version": "0.1.0",
-  "description": "Express API Generator (Sequelize + Typescript)",
+  "version": "0.0.1",
+  "description": "",
   "main": "build/index.ts",
   "scripts": {
     "build": "tsc",

@@ -1,7 +1,7 @@
 {
-  "name": "express-api-generator",
-  "version": "0.1.0",
-  "description": "Express API Generator (Mongoose + Typescript)",
+  "name": "express",
+  "version": "0.0.1",
+  "description": "",
   "main": "build/index.ts",
   "scripts": {
     "build": "tsc",
