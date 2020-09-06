@@ -1,0 +1,5 @@
+node_modules
+build
+logs
+.nyc_output
+coverage

@@ -1,6 +1,7 @@
 const fs = require('fs-extra');
+const path = require('path');
 
-const addRouteToRouteIndex = (route) => {
+exports.addRouteToRouteIndex = (route) => {
   const data = fs.readFileSync('./src/routes/index.js').toString().split('\n');
 
   let processComplete = false;
@@ -18,7 +19,7 @@ const addRouteToRouteIndex = (route) => {
   });
 };
 
-const addImportToRouteIndex = (route) => {
+exports.addImportToRouteIndex = (route) => {
   const data = fs.readFileSync('./src/routes/index.js').toString().split('\n');
 
   let processComplete = false;
@@ -36,5 +37,32 @@ const addImportToRouteIndex = (route) => {
   });
 };
 
-exports.addRouteToRouteIndex = addRouteToRouteIndex;
-exports.addImportToRouteIndex = addImportToRouteIndex;
+exports.generateFile = async (dir, fileName, lang, dbDriver) => {
+  const FileName = fileName.charAt(0).toUpperCase() + fileName.slice(1);
+
+  let dirExt = `${dir}.${lang}`;
+
+  //conditonal case for sequelize when generating model
+  if (dbDriver === 'sequelize' && dir === 'model') {
+    dirExt = `${lang}`;
+  }
+
+  //conditonal case for test folder
+  let dirs = dir + 's';
+  if (dir.includes('test')) {
+    dirs = dir;
+    dirExt = `test.${lang}`;
+  }
+
+  await fs.copy(
+    path.resolve(__dirname, `./../lib/${dbDriver}/${lang}/express/src/${dirs}/user.${dirExt}`),
+    `./src/${dirs}/${fileName}.${dirExt}`
+  );
+
+  const data = fs.readFileSync(`./src/${dirs}/${fileName}.${dirExt}`).toString();
+
+  let newData = data.replace(/user/g, fileName);
+  newData = newData.replace(/User/g, FileName);
+
+  fs.writeFileSync(`./src/${dirs}/${fileName}.${dirExt}`, newData);
+};

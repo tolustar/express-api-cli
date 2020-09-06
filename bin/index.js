@@ -79,6 +79,11 @@ const options = yargs
     describe: 'Create new integration test',
     type: 'string'
   })
+  .option('C', {
+    alias: 'config',
+    describe: 'Create new config file',
+    type: 'string'
+  })
   .help().argv;
 
 run(options);

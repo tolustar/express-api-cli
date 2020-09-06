@@ -1,0 +1,31 @@
+{
+  "root": true,
+  "parser": "babel-eslint",
+  "extends": ["plugin:prettier/recommended"],
+  "rules": {
+    "no-console": 0,
+    "no-unused-vars": "error",
+    "quotes": [
+      "error",
+      "single",
+      {
+        "allowTemplateLiterals": true
+      }
+    ],
+    "semi-style": ["error", "last"],
+    "max-len": [
+      "error",
+      {
+        "code": 80
+      }
+    ],
+    "no-irregular-whitespace": "error",
+    "no-trailing-spaces": "error",
+    "no-multi-spaces": "error",
+    "eqeqeq": ["error", "always"]
+  },
+  "env": {
+    "browser": true,
+    "node": true
+  }
+}

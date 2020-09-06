@@ -1,0 +1,11 @@
+const path = require('path');
+require('dotenv').config();
+
+const dir = process.env.NODE_ENV === 'production' ? 'build' : 'src';
+
+module.exports = {
+  'config': path.resolve(dir,'config', 'config.js'),
+  'models-path': path.resolve(dir, 'models'),
+  'seeders-path': path.resolve(dir, 'seeders'),
+  'migrations-path': path.resolve(dir, 'migrations')
+}

@@ -6,9 +6,7 @@ const chalk = require('chalk');
 const { creatingProjectSpinner, npmInstallSpinner } = require('./spinners');
 
 const npmInstall = (projectName) => {
-  npmInstallSpinner.start(
-    chalk.cyan(`Installing required packages for ${projectName}`)
-  );
+  npmInstallSpinner.start(chalk.cyan(`Installing required packages for ${projectName}`));
 
   const { spawn } = require('child_process');
 
@@ -41,6 +39,21 @@ const npmInstall = (projectName) => {
   });
 };
 
+const projectToInstall = async (selectLang, selectDbDriver, projectName) => {
+  if (selectLang === 'Javascript' && selectDbDriver === 'Mongoose') {
+    await fs.copy(path.resolve(__dirname, './../lib/mongoose/js/express'), `./${projectName}`);
+  }
+  if (selectLang === 'Javascript' && selectDbDriver === 'Sequelize') {
+    await fs.copy(path.resolve(__dirname, './../lib/sequelize/js/express'), `./${projectName}`);
+  }
+  if (selectLang === 'Typescript' && selectDbDriver === 'Mongoose') {
+    await fs.copy(path.resolve(__dirname, './../lib/mongoose/ts/express'), `./${projectName}`);
+  }
+  if (selectLang === 'Typescript' && selectDbDriver === 'Sequelize') {
+    await fs.copy(path.resolve(__dirname, './../lib/sequelize/ts/express'), `./${projectName}`);
+  }
+};
+
 const newProject = async (projectName) => {
   try {
     const template = await inquirer.prompt([
@@ -58,16 +71,10 @@ const newProject = async (projectName) => {
       }
     ]);
 
-    console.log('template', template);
-
     creatingProjectSpinner.start(chalk.cyan(`Creating ${projectName}`));
-    await fs.copy(
-      path.resolve(__dirname, './../lib/mongoose/express'),
-      `./${projectName}`
-    );
-    creatingProjectSpinner.succeed(
-      chalk.green(`${projectName} created successfully`)
-    );
+    await projectToInstall(template.selectLang, template.selectDbDriver, projectName);
+
+    creatingProjectSpinner.succeed(chalk.green(`${projectName} created successfully`));
 
     npmInstall(projectName);
   } catch (error) {
