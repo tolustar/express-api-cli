@@ -9,7 +9,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Tolustar",
+  "author": "Tolustar <info@tolustar.com> (tolustar.com)",
   "license": "MIT",
   "dependencies": {
     "chalk": "^4.1.0",
