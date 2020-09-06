@@ -29,8 +29,11 @@ const npmInstall = (projectName) => {
 
     console.log(
       chalk.green(`
+      🥳🥳🥳🥳🥳
     Voila!!! ${projectName} is ready for development. 
+
     Create something Awesome
+       🚀🚀🚀🚀🚀
 
     Visit https://google.com for Express
 

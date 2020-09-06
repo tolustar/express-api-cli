@@ -43,8 +43,8 @@ const generateRoute = async (route, config) => {
     await generateFile('route', route, config.lang, config.dbDriver);
 
     console.log(chalk.green(`${route}.route.${config.lang} generated successfully`));
-    addImportToRouteIndex(route);
-    addRouteToRouteIndex(route);
+    addImportToRouteIndex(route, config.lang);
+    addRouteToRouteIndex(route, config.lang);
   } catch (error) {
     console.log(error);
   }
@@ -63,6 +63,17 @@ const generateValidator = async (validator, config) => {
     if (!validator) return;
     await fs.writeFile(`./src/validators/${validator}.validator.${config.lang}`, '');
     console.log(chalk.green(`${validator}.validator.${config.lang} generated successfully`));
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const generateInterface = async (interface_, config) => {
+  try {
+    if (config.lang === 'js') return;
+    if (!interface_) return;
+    await fs.writeFile(`./src/interfaces/${interface_}.interface.${config.lang}`, '');
+    console.log(chalk.green(`${interface_}.interface.${config.lang} generated successfully`));
   } catch (error) {
     console.log(error);
   }
@@ -187,6 +198,7 @@ module.exports = async (options) => {
     generateRoute(options.route, config);
     generateResource(options.resource, config);
     generateValidator(options.validator, config);
+    generateInterface(options.interface, config);
     generateUtil(options.util, config);
     generateConfig(options.config, config);
     generateMiddleware(options.middleware, config);

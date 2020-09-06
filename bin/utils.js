@@ -1,26 +1,29 @@
 const fs = require('fs-extra');
 const path = require('path');
 
-exports.addRouteToRouteIndex = (route) => {
-  const data = fs.readFileSync('./src/routes/index.js').toString().split('\n');
+exports.addRouteToRouteIndex = (route, lang) => {
+  const data = fs.readFileSync(`./src/routes/index.${lang}`).toString().split('\n');
 
   let processComplete = false;
   data.forEach((item, index) => {
     if (item.includes('return router') && processComplete === false) {
-      const newRoute = `  router.use('/${route}', ${route}Route);`;
+      let newRoute = `  router.use('/${route}', ${route}Route);`;
+      if (lang === 'ts') {
+        newRoute = `  router.use('/${route}', new ${route}Route().getRoutes());`;
+      }
 
       data.splice(index, 0, newRoute);
       const addNewRoute = data.join('\n');
 
-      fs.writeFileSync('./src/routes/index.js', addNewRoute);
+      fs.writeFileSync(`./src/routes/index.${lang}`, addNewRoute);
 
       processComplete = true;
     }
   });
 };
 
-exports.addImportToRouteIndex = (route) => {
-  const data = fs.readFileSync('./src/routes/index.js').toString().split('\n');
+exports.addImportToRouteIndex = (route, lang) => {
+  const data = fs.readFileSync(`./src/routes/index.${lang}`).toString().split('\n');
 
   let processComplete = false;
   data.forEach((item, index) => {
@@ -30,7 +33,7 @@ exports.addImportToRouteIndex = (route) => {
       data.splice(index, 0, newImport);
       const addNewImport = data.join('\n');
 
-      fs.writeFileSync('./src/routes/index.js', addNewImport);
+      fs.writeFileSync(`./src/routes/index.${lang}`, addNewImport);
 
       processComplete = true;
     }

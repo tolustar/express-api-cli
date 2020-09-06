@@ -64,6 +64,11 @@ const options = yargs
     describe: 'Create new validator',
     type: 'string'
   })
+  .option('i', {
+    alias: 'interface',
+    describe: 'Create new interface',
+    type: 'string'
+  })
   .option('T', {
     alias: 'test',
     describe: 'Create new unit and integration test',
