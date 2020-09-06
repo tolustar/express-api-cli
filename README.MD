@@ -25,7 +25,7 @@ concentrate on building that awesome application
 ## Getting Started
 
 1.  Ensure [Node.js and NPM](https://nodejs.org/en/download/) is installed on your computer
-2.  Install the package **npm install -g express-api-cli**
+2.  Install the package globally **npm install -g express-api-cli**
 3.  Open your command line tool and type the following command to create a new project **exp-api
     create awesome-project**
 
