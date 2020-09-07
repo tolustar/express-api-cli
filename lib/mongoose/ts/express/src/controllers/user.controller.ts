@@ -7,6 +7,12 @@ import { Request, Response, NextFunction } from 'express';
 class UserController {
   public UserService = new userService();
 
+/**
+* Controller to get all users available
+* @param  {object} Request - Aggregation object
+* @param {object} Response - response object
+* @param {Function} NextFunction
+*/
   public getAllUsers = async (
     req: Request,
     res: Response,
@@ -24,6 +30,12 @@ class UserController {
     }
   };
 
+/**
+* Controller to get a user
+* @param  {object} Request - Aggregation object
+* @param {object} Response - response object
+* @param {Function} NextFunction
+*/
   public getUser = async (
     req: Request,
     res: Response,
@@ -41,6 +53,12 @@ class UserController {
     }
   };
 
+/**
+* Controller to create new user
+* @param  {object} Request - Aggregation object
+* @param {object} Response - response object
+* @param {Function} NextFunction
+*/
   public newUser = async (
     req: Request,
     res: Response,
@@ -58,6 +76,12 @@ class UserController {
     }
   };
 
+/**
+* Controller to update a user
+* @param  {object} Request - Aggregation object
+* @param {object} Response - response object
+* @param {Function} NextFunction
+*/
   public updateUser = async (
     req: Request,
     res: Response,
@@ -75,6 +99,12 @@ class UserController {
     }
   };
 
+/**
+* Controller to delete a single user
+* @param  {object} Request - Aggregation object
+* @param {object} Response - response object
+* @param {Function} NextFunction
+*/
   public deleteUser = async (
     req: Request,
     res: Response,
