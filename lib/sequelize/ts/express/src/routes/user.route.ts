@@ -13,14 +13,24 @@ class UserRoutes {
   }
 
   private routes = () => {
+
+    //route to get all users
     this.router.get('', this.UserController.getAllUsers);
+
+    //route to create a new user
     this.router.post(
       '',
       this.UserValidator.newUser,
       this.UserController.newUser
     );
+
+    //route to get a single user by their id
     this.router.get('/:id', userAuth, this.UserController.getUser);
+
+    //route to update a user by their id
     this.router.put('/:id', this.UserController.updateUser);
+
+    //route to delete a user by their id
     this.router.delete('/:id', this.UserController.deleteUser);
   };
 

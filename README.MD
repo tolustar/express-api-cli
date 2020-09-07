@@ -7,7 +7,7 @@
 ## About
 
 Express-api-cli is a command line tool that generates an express project structure preconfigured
-with most commonly used packages that can spped up your development workflow. Rather than wasting
+with most commonly used packages that can speed up your development workflow. Rather than wasting
 time setting up your project structure, express-api-cli does the heavy lifting so that you can
 concentrate on building that awesome application
 
@@ -29,7 +29,7 @@ concentrate on building that awesome application
 3.  Open your command line tool and type the following command to create a new project **exp-api
     create awesome-project**
 
-    _Subsitute "awesome-project with the name of your project._
+    _Subsitute "awesome-project" with the name of your project._
 
 4.  Select your preferred language (Javascript or Typescript) and Database Driver (Mongoose or
     Sequelize)
