@@ -45,18 +45,22 @@ const npmInstall = (projectName) => {
 };
 
 const projectToInstall = async (selectLang, selectDbDriver, projectName) => {
-  if (selectLang === 'Javascript' && selectDbDriver === 'Mongoose') {
-    await fs.copy(path.resolve(__dirname, './../lib/mongoose/js/express'), `./${projectName}`);
-  }
-  if (selectLang === 'Javascript' && selectDbDriver === 'Sequelize') {
-    await fs.copy(path.resolve(__dirname, './../lib/sequelize/js/express'), `./${projectName}`);
-  }
-  if (selectLang === 'Typescript' && selectDbDriver === 'Mongoose') {
-    await fs.copy(path.resolve(__dirname, './../lib/mongoose/ts/express'), `./${projectName}`);
-  }
-  if (selectLang === 'Typescript' && selectDbDriver === 'Sequelize') {
-    await fs.copy(path.resolve(__dirname, './../lib/sequelize/ts/express'), `./${projectName}`);
-  }
+  await installProject(selectLang, selectDbDriver, projectName);
+};
+
+const installProject = async (selectLang, selectDbDriver, projectName) => {
+  let langAlias = selectLang === 'Javascript' ? 'js' : selectLang === 'Typescript' ? 'ts' : 'js';
+  let driverAlias =
+    selectDbDriver === 'Mongoose'
+      ? 'mongoose'
+      : selectDbDriver === 'Sequelize'
+      ? 'sequelize'
+      : 'mongoose';
+
+  await fs.copy(
+    path.resolve(__dirname, `./../lib/${driverAlias}/${langAlias}/express`),
+    `./${projectName}`
+  );
 };
 
 const newProject = async (projectName) => {
