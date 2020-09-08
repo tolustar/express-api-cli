@@ -77,6 +77,12 @@ const newProject = async (projectName) => {
         name: 'selectDbDriver',
         message: 'Select a database driver',
         choices: ['Mongoose', 'Sequelize']
+      },
+      {
+        type: 'list',
+        name: 'selectEmailProvider',
+        message: 'Select an email provider',
+        choices: ['Sendgrid', 'Nodemailer', 'Mailgun']
       }
     ]);
 
