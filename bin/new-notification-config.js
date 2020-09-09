@@ -9,7 +9,7 @@ const setupNotificationConfig = async (notification) => {
   const notificationType = getNotificationType(notification);
   await fs.copy(
     path.resolve(__dirname, `./../lib/notification/${notificationType.name}/`),
-    `./src/notification/${notificationType.name}`
+    `./src/config/mail/${notificationType.name}`
   );
   appendEnvironmentVariable(notificationType.env);
 };
