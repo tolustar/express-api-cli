@@ -191,7 +191,6 @@ const checkLangAndDB = async () => {
 module.exports = async (options) => {
   try {
     let config = await checkLangAndDB();
-
     generateModel(options.model, config);
     generateController(options.controller, config);
     generateService(options.service, config);
