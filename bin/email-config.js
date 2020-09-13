@@ -5,11 +5,16 @@ const chalk = require('chalk');
 
 const { creatingProjectSpinner } = require('./spinners');
 
-const setupNotificationConfig = async (notification) => {
+const setupNotificationConfig = async (notification, lang) => {
+  let langAlias = lang === 'Javascript' ? 'js' : 'ts';
   const notificationType = getNotificationType(notification);
   await fs.copy(
-    path.resolve(__dirname, `./../lib/notification/${notificationType.name}/`),
-    `./src/config/mail/${notificationType.name}`
+    path.resolve(
+      __filename,
+      // eslint-disable-next-line max-len
+      `./../../lib/notification/email/${langAlias}/${notificationType.name}.${langAlias}`
+    ),
+    `./src/config/mail/${notificationType.name}.${langAlias}`
   );
   appendEnvironmentVariable(notificationType.env);
 };
@@ -64,9 +69,15 @@ const newNotificationConfig = async () => {
         name: 'notificationConfig',
         message: 'Select a notification config',
         choices: ['Sendgrid', 'Mailgun']
+      },
+      {
+        type: 'list',
+        name: 'selectLang',
+        message: 'Select a development language',
+        choices: ['Javascript', 'Typescript']
       }
     ]);
-    await setupNotificationConfig(template.notificationConfig);
+    await setupNotificationConfig(template.notificationConfig, template.selectLang);
     console.log(
       chalk.green(`Notification Config for ${template.notificationConfig} created successfully`)
     );

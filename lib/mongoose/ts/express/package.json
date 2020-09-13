@@ -22,6 +22,8 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.10.2",
     "morgan": "^1.10.0",
+    "@sendgrid/mail": "^7.2.5",
+    "mailgun-js": "^0.22.0",
     "ts-node-dev": "^1.0.0-pre.62",
     "winston": "^3.3.3",
     "winston-daily-rotate-file": "^4.5.0"

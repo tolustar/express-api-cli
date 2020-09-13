@@ -12,11 +12,9 @@
   "author": "Tolustar <info@tolustar.com> (tolustar.com)",
   "license": "MIT",
   "dependencies": {
-    "@sendgrid/mail": "^7.2.5",
     "chalk": "^4.1.0",
     "fs-extra": "^9.0.1",
     "inquirer": "^7.3.3",
-    "mailgun-js": "^0.22.0",
     "ora": "^5.0.0",
     "yargs": "^15.4.1"
   },

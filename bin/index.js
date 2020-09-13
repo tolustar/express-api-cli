@@ -3,7 +3,7 @@
 const run = require('./generators');
 const getNotificationCommand = require('./cli/notification');
 const getNewProjectCommand = require('./cli/project');
-const newNotificationConfig = require('./new-notification-config');
+const newNotificationConfig = require('./email-config');
 const newProject = require('./new-project');
 
 const notificationConfigCommand = getNotificationCommand(newNotificationConfig);

@@ -49,13 +49,8 @@ const projectToInstall = async (selectLang, selectDbDriver, projectName) => {
 };
 
 const installProject = async (selectLang, selectDbDriver, projectName) => {
-  let langAlias = selectLang === 'Javascript' ? 'js' : selectLang === 'Typescript' ? 'ts' : 'js';
-  let driverAlias =
-    selectDbDriver === 'Mongoose'
-      ? 'mongoose'
-      : selectDbDriver === 'Sequelize'
-      ? 'sequelize'
-      : 'mongoose';
+  let langAlias = selectLang === 'Javascript' ? 'js' : 'ts';
+  let driverAlias = selectDbDriver === 'Mongoose' ? 'mongoose' : 'sequelize';
 
   await fs.copy(
     path.resolve(__dirname, `./../lib/${driverAlias}/${langAlias}/express`),
