@@ -12,7 +12,7 @@ const setupNotificationConfig = async (notification, lang) => {
     path.resolve(
       __filename,
       // eslint-disable-next-line max-len
-      `./../../lib/notification/email/${langAlias}/${notificationType.name}.${langAlias}`
+      `./../../lib/email/${langAlias}/${notificationType.name}.${langAlias}`
     ),
     `./src/config/mail/${notificationType.name}.${langAlias}`
   );
