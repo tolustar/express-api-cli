@@ -14,7 +14,7 @@ const setupEmailConfig = async (emailConfig, lang) => {
       // eslint-disable-next-line max-len
       `./../../lib/email/${langAlias}/${emailType.name}.${langAlias}`
     ),
-    `./src/config/email/${emailType.name}.${langAlias}`
+    `./src/config/${emailType.name}.${langAlias}`
   );
   appendEnvironmentVariable(emailType.env);
 };

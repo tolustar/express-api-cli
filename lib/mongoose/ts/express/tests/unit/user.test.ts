@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import UserService from '../../services/user.service';
+import UserService from '../../src/services/user.service';
 import mongoose from 'mongoose';
 
 import dotenv from 'dotenv';
@@ -29,4 +29,4 @@ describe('User', () => {
     mongoose.connection.close();
     done();
   });
-}).timeout(10000);
+});

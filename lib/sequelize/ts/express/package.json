@@ -7,8 +7,10 @@
     "build": "tsc",
     "dev": "ts-node-dev --respawn --transpile-only ./src/index.ts",
     "start": "tsc && node build/index.js",
-    "test": "cross-env NODE_ENV=test mocha --exit --recursive --require ts-node/register src/tests/**/*.ts",
-    "test:coverage": "cross-env NODE_ENV=test nyc --require ts-node/register --reporter lcov --reporter text mocha --exit --recursive src/tests/**/*.ts"
+    "test": "cross-env NODE_ENV=test mocha --exit --recursive --require ts-node/register --timeout=5000 tests/**/*.ts",
+    "test:coverage": "cross-env NODE_ENV=test nyc --require ts-node/register --reporter lcov --reporter text mocha --exit --recursive --timeout=5000 tests/**/*.ts",
+    "lint": "eslint . --ext .ts",
+    "lint-fix": "eslint . --ext .ts --fix"
   },
   "author": "Tolustar",
   "license": "MIT",

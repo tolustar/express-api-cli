@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import UserService from '../../services/user.service';
+import UserService from '../../src/services/user.service';
 
 describe('User', () => {
   describe('Get Users', () => {
@@ -8,4 +8,4 @@ describe('User', () => {
       expect(result).to.be.an('array');
     });
   });
-}).timeout(10000);
+});
