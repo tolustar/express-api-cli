@@ -25,8 +25,20 @@ const result = yargs
       );
     }
   })
-  .command('config email', 'Setup a new email config', () => {
-    newEmailConfig();
+  .command('config', 'Setup a new config', (value) => {
+    const args = value.argv._;
+    if (args[1] === 'email') {
+      newEmailConfig();
+    } else {
+      console.log(
+        chalk.red(`
+          Please provide a configuration type eg 'email'. 
+  
+          Example: 
+          exp-api config email
+        `)
+      );
+    }
   })
   .usage('Usage: express-api-cli')
   .option('m', {

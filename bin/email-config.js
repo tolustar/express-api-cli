@@ -14,7 +14,7 @@ const setupEmailConfig = async (emailConfig, lang) => {
       // eslint-disable-next-line max-len
       `./../../lib/email/${langAlias}/${emailType.name}.${langAlias}`
     ),
-    `./src/config/mail/${emailType.name}.${langAlias}`
+    `./src/config/email/${emailType.name}.${langAlias}`
   );
   appendEnvironmentVariable(emailType.env);
 };
@@ -76,9 +76,7 @@ const newEmailConfig = async () => {
     const projectLanguage = lang === 'js' ? 'Javascript' : 'Typescript';
 
     await setupEmailConfig(template.emailConfig, projectLanguage);
-    console.log(
-      chalk.green(`Notification Config for ${template.emailConfig} created successfully`)
-    );
+    console.log(chalk.green(`Email config for ${template.emailConfig} created successfully`));
   } catch (error) {
     spinner.fail(`${chalk.cyan(`Error creating template`)} -  ${chalk.red(error)}`);
   }
