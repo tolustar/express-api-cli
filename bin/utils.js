@@ -1,5 +1,7 @@
+/* eslint-disable max-len */
 const fs = require('fs-extra');
 const path = require('path');
+const ora = require('ora');
 
 exports.addRouteToRouteIndex = (route, lang) => {
   const data = fs.readFileSync(`./src/routes/index.${lang}`).toString().split('\n');
@@ -69,3 +71,55 @@ exports.generateFile = async (dir, fileName, lang, dbDriver) => {
 
   fs.writeFileSync(`./src/${dirs}/${fileName}.${dirExt}`, newData);
 };
+
+exports.checkLangAndDB = async () => {
+  let config = {
+    lang: 'js',
+    dbDriver: 'mongoose'
+  };
+
+  let files = fs.readdirSync('./src/');
+  const file = files.find((item) => item.includes('.ts'));
+  if (file) {
+    config.lang = 'ts';
+  }
+
+  let db = null;
+  try {
+    if (config.lang === 'js') {
+      db = await fs.readFile('./src/config/database.js');
+    } else {
+      db = await fs.readFile('./src/config/database.ts');
+    }
+    db = db.toString();
+  } catch (error) {
+    console.log(
+      chalk.yellow(`
+        Database config not detected in src/config.
+        express-api-cli shall assume project default database config uses mongoose. Thank you.      
+      `)
+    );
+  }
+
+  if (db && db.includes('mongoose') && db.includes('sequelize')) {
+    console.log(
+      chalk.yellow(`
+      Application contains more than one DB configuration in src/config/database.js.
+      Please use one db configuration or remove unused imports to allow express-api-cli function properly. 
+
+      In the meantime Express-api-cli shall use mongoose database configuration  
+      Thank you.      
+    `)
+    );
+  } else {
+    if (db && db.includes('sequelize')) {
+      config.dbDriver = 'sequelize';
+    }
+  }
+
+  return config;
+};
+
+exports.spinner = ora({
+  spinner: 'star2'
+});

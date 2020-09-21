@@ -2,7 +2,12 @@
 const fs = require('fs-extra');
 const chalk = require('chalk');
 
-const { addRouteToRouteIndex, addImportToRouteIndex, generateFile } = require('./utils');
+const {
+  addRouteToRouteIndex,
+  addImportToRouteIndex,
+  generateFile,
+  checkLangAndDB
+} = require('./utils');
 
 const generateModel = async (model, config) => {
   if (!model) return;
@@ -138,54 +143,6 @@ const generateIntegrationTest = async (integrationtest, config) => {
 const generateTest = async (test, config) => {
   generateUnitTest(test, config);
   generateIntegrationTest(test, config);
-};
-
-const checkLangAndDB = async () => {
-  let config = {
-    lang: 'js',
-    dbDriver: 'mongoose'
-  };
-
-  let files = fs.readdirSync('./src/');
-  const file = files.find((item) => item.includes('.ts'));
-  if (file) {
-    config.lang = 'ts';
-  }
-
-  let db = null;
-  try {
-    if (config.lang === 'js') {
-      db = await fs.readFile('./src/config/database.js');
-    } else {
-      db = await fs.readFile('./src/config/database.ts');
-    }
-    db = db.toString();
-  } catch (error) {
-    console.log(
-      chalk.yellow(`
-        Database config not detected in src/config.
-        express-api-cli shall assume project default database config uses mongoose. Thank you.      
-      `)
-    );
-  }
-
-  if (db && db.includes('mongoose') && db.includes('sequelize')) {
-    console.log(
-      chalk.yellow(`
-      Application contains more than one DB configuration in src/config/database.js.
-      Please use one db configuration or remove unused imports to allow express-api-cli function properly. 
-
-      In the meantime Express-api-cli shall use mongoose database configuration  
-      Thank you.      
-    `)
-    );
-  } else {
-    if (db && db.includes('sequelize')) {
-      config.dbDriver = 'sequelize';
-    }
-  }
-
-  return config;
 };
 
 module.exports = async (options) => {

@@ -2,8 +2,14 @@ const path = require('path');
 const fs = require('fs-extra');
 const inquirer = require('inquirer');
 const chalk = require('chalk');
+const ora = require('ora');
 
-const { creatingProjectSpinner, npmInstallSpinner } = require('./spinners');
+const creatingProjectSpinner = ora({
+  spinner: 'star2'
+});
+const npmInstallSpinner = ora({
+  spinner: 'star2'
+});
 
 const npmInstall = (projectName) => {
   npmInstallSpinner.start(chalk.cyan(`Installing required packages for ${projectName}`));

@@ -3,20 +3,20 @@ const fs = require('fs-extra');
 const inquirer = require('inquirer');
 const chalk = require('chalk');
 
-const { creatingProjectSpinner } = require('./spinners');
+const { spinner, checkLangAndDB } = require('./utils');
 
-const setupNotificationConfig = async (notification, lang) => {
+const setupEmailConfig = async (emailConfig, lang) => {
   let langAlias = lang === 'Javascript' ? 'js' : 'ts';
-  const notificationType = getNotificationType(notification);
+  const emailType = getEmailConfigType(emailConfig);
   await fs.copy(
     path.resolve(
       __filename,
       // eslint-disable-next-line max-len
-      `./../../lib/email/${langAlias}/${notificationType.name}.${langAlias}`
+      `./../../lib/email/${langAlias}/${emailType.name}.${langAlias}`
     ),
-    `./src/config/mail/${notificationType.name}.${langAlias}`
+    `./src/config/mail/${emailType.name}.${langAlias}`
   );
-  appendEnvironmentVariable(notificationType.env);
+  appendEnvironmentVariable(emailType.env);
 };
 
 const checkIfProjectHasBeenCreated = () => {
@@ -37,8 +37,8 @@ const appendEnvironmentVariable = (env) => {
   });
 };
 
-const getNotificationType = (type) => {
-  const notification = {
+const getEmailConfigType = (type) => {
+  const emailEnv = {
     Sendgrid: {
       name: 'sendgrid',
       env: '\nSENDGRID_KEY= ' + '\nSENDGRID_FROM='
@@ -52,38 +52,36 @@ const getNotificationType = (type) => {
       env: '\nENDGRID_KEY= ' + '\nSENDGRID_FROM='
     }
   };
-  return notification[type] || notification['default'];
+  return emailEnv[type] || emailEnv['default'];
 };
 
-const newNotificationConfig = async () => {
+const newEmailConfig = async () => {
   try {
     if (!checkIfProjectHasBeenCreated()) {
       console.log(
-        chalk.cyan(`You need to create at least one project before setting Notification Config`)
+        chalk.cyan(`You need to create at least one project before setting up Email Config`)
       );
       return 'false';
     }
     const template = await inquirer.prompt([
       {
         type: 'list',
-        name: 'notificationConfig',
-        message: 'Select a notification config',
+        name: 'emailConfig',
+        message: 'Select an Email Configuration',
         choices: ['Sendgrid', 'Mailgun']
-      },
-      {
-        type: 'list',
-        name: 'selectLang',
-        message: 'Select a development language',
-        choices: ['Javascript', 'Typescript']
       }
     ]);
-    await setupNotificationConfig(template.notificationConfig, template.selectLang);
+
+    const { lang } = await checkLangAndDB();
+    const projectLanguage = lang === 'js' ? 'Javascript' : 'Typescript';
+
+    await setupEmailConfig(template.emailConfig, projectLanguage);
     console.log(
-      chalk.green(`Notification Config for ${template.notificationConfig} created successfully`)
+      chalk.green(`Notification Config for ${template.emailConfig} created successfully`)
     );
   } catch (error) {
-    creatingProjectSpinner.fail(`${chalk.cyan(`Error creating template`)} -  ${chalk.red(error)}`);
+    spinner.fail(`${chalk.cyan(`Error creating template`)} -  ${chalk.red(error)}`);
   }
 };
 
-module.exports = newNotificationConfig;
+module.exports = newEmailConfig;
