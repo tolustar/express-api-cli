@@ -52,24 +52,29 @@ exports.generateFile = async (dir, fileName, lang, dbDriver) => {
     dirExt = `${lang}`;
   }
 
+  let srcCopy;
+  let destinationCopy;
   //conditonal case for test folder
   let dirs = dir + 's';
   if (dir.includes('test')) {
     dirs = dir;
     dirExt = `test.${lang}`;
+
+    srcCopy = `./../lib/${dbDriver}/${lang}/express/${dirs}/user.${dirExt}`;
+    destinationCopy = `./${dirs}/${fileName}.${dirExt}`;
+  } else {
+    srcCopy = `./../lib/${dbDriver}/${lang}/express/src/${dirs}/user.${dirExt}`;
+    destinationCopy = `./src/${dirs}/${fileName}.${dirExt}`;
   }
 
-  await fs.copy(
-    path.resolve(__dirname, `./../lib/${dbDriver}/${lang}/express/src/${dirs}/user.${dirExt}`),
-    `./src/${dirs}/${fileName}.${dirExt}`
-  );
+  await fs.copy(path.resolve(__dirname, srcCopy), destinationCopy);
 
-  const data = fs.readFileSync(`./src/${dirs}/${fileName}.${dirExt}`).toString();
+  const data = fs.readFileSync(destinationCopy).toString();
 
   let newData = data.replace(/user/g, fileName);
   newData = newData.replace(/User/g, FileName);
 
-  fs.writeFileSync(`./src/${dirs}/${fileName}.${dirExt}`, newData);
+  fs.writeFileSync(destinationCopy, newData);
 };
 
 exports.checkLangAndDB = async () => {
