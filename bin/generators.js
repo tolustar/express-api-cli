@@ -140,6 +140,16 @@ const generateIntegrationTest = async (integrationtest, config) => {
   }
 };
 
+const getVersion = async (options) => {
+  try {
+    if (Object.keys(options)[2] !== 'version') return;
+    const getVersion = require('./../package.json').version;
+    console.log(chalk.green(`v${getVersion}`));
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 const generateTest = async (test, config) => {
   generateUnitTest(test, config);
   generateIntegrationTest(test, config);
@@ -161,5 +171,6 @@ module.exports = async (options) => {
     generateUnitTest(options.unittest, config);
     generateIntegrationTest(options.integrationtest, config);
     generateTest(options.test, config);
+    getVersion(options);
   } catch (error) {}
 };

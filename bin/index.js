@@ -40,7 +40,16 @@ const result = yargs
       );
     }
   })
-  .usage('Usage: express-api-cli')
+  .usage(
+    `
+Usage: Speed up your application development with express-api-cli
+  `
+  )
+  .option('v', {
+    alias: 'version',
+    describe: 'Get express-api-cli version',
+    type: 'string'
+  })
   .option('m', {
     alias: 'model',
     describe: 'Create new model',
@@ -76,7 +85,7 @@ const result = yargs
     describe: 'Create new middleware',
     type: 'string'
   })
-  .option('v', {
+  .option('V', {
     alias: 'validator',
     describe: 'Create new validator',
     type: 'string'

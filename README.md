@@ -49,7 +49,8 @@ Voila!!! you are set to start creating an awesome application 🚀🚀🚀
 | -R or --resource        |   Create a new route, model, controller and service in their respective directories   |                exp-api -R post |
 | -u or --utility         |                   Create a new utility file in the utils directory                    |       exp-api -u random-string |
 | -M or --middleware      |                  Create a new middleware in the middleware directory                  |                exp-api -M auth |
-| -v or --validator       |                Create a new validator file in the validator directory                 |      exp-api -v user-validator |
+| -V or --validator       |                Create a new validator file in the validator directory                 |      exp-api -v user-validator |
+| -v or --version         |                              Get express-api-cli version                              |                     exp-api -v |
 | -i or --interface       | Create a new interface file in the interface directory (Available only on Typescript) |                exp-api -i post |
 | -U or --unittest        |                   Create a new unit test file in the test directory                   |                exp-api -U post |
 | -I or --integrationtest |               Create a new integration test file in the test directory                |                exp-api -I post |
